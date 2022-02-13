@@ -8,15 +8,18 @@ import re
 import base64
 import os
 
-sv = Service('ywyzm')
+sv = Service('套娃')
 
 
 def img_gen(inp, word1='要我一直', word2=f'吗'):
+    ori = inp.size[0]
+
     # 输入图
     le = len(word1) + len(word2) + 1
     word_y = 150
 
     inp_x = le * 100
+    ori /= inp_x
     inp_y = int(inp_x * inp.size[1] / inp.size[0])
     inp = inp.resize((inp_x, inp_y), Image.ANTIALIAS)
 
@@ -67,6 +70,7 @@ def img_gen(inp, word1='要我一直', word2=f'吗'):
         last_x = outp_small_cor_x
         last_y = outp_small_cor_y
 
+    outp = outp.resize((int(outp_x * ori), int(outp_y * ori)), Image.ANTIALIAS)
     return outp
 
 
